@@ -1,123 +1,54 @@
-<div>
-    <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-        <div class="flex justify-between mb-3">
-            <div>
-                <button type="button" data-tooltip-target="data-tooltip" data-tooltip-placement="bottom"
-                    class="hidden sm:inline-flex items-center justify-center text-gray-500 w-8 h-8 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm"><svg
-                        class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 16 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
-                    </svg><span class="sr-only">Download data</span>
-                </button>
-                <div id="data-tooltip" role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    CSVダウンロード
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+<div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+    <p class="font-bold">{{ $last_exam->date }} あなたの検査結果（{{ $last_exam->result }} ng/ml）</p>
+    <div class="py-6 justify-center" id="result">
+        <div class="flex flex-row gap-2" id="range-result">
+            <div class="w-1/6 text-center">
+                <p class="font-bold">欠乏</p>
+                <div class="w-full h-8 bg-orange-300 text-black text-center py-2 m-2">
+                    @if ($last_exam->result < 15)
+                        <p class="font-bold">{{ $last_exam->result }}</p>
+                    @endif
                 </div>
+                <p>0-15</p>
+            </div>
+            <div class="w-1/12 text-center">
+                <p class="font-bold">不足</p>
+                <div class="w-full h-8 bg-yellow-300 text-black text-center py-2 m-2">
+                    @if ($last_exam->result > 14 && $last_exam->result < 23)
+                    <span class="font-bold">{{ $last_exam->result }}</span>
+                    @endif
+                </div>
+                <p>15-22</p>
+            </div>
+            <div class="w-1/2 text-center">
+                <p class="font-bold">至適</p>
+                <div class="w-full h-8 bg-green-300 text-black text-center py-2 m-2">
+                    @if ($last_exam->result > 22 && $last_exam->result < 75)
+                        <span class="font-bold">{{ $last_exam->result }}</span>
+                    @endif
+                </div>
+                <p>23-74</p>
+            </div>
+            <div class="w-1/4 text-center">
+                <p class="font-bold">過剰</p>
+                <div class="w-full h-8 bg-red-400 text-black text-center py-2 m-2">
+                    @if ($last_exam->result > 74)
+                        <span class="font-bold">{{ $last_exam->result }}</span>
+                    @endif
+                </div>
+                <p>75-100</p>
             </div>
         </div>
 
-        <!-- Donut Chart -->
-        <div class="py-6" id="donut-chart"></div>
+        <div class="mt-4 flex justify-center" id="text-result">
+            <div class="w-1/4 text-center">
+                <div class="w-full h-8 bg-blue-500 text-white text-center py-2">
+                    <p class="font-bold">25-Hydroxy D Total</p>
+                </div>
+                <div class="w-full h-8 border-solid border-2 border-blue-500 text-black text-center py-2">
+                    <p class="font-bold">{{ $last_exam->result }}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-@script
-<script>
-    const examData = <?php echo $exams; ?>;
-
-    // Extracting results and dates using map
-    const resultArr = examData.map(exam => exam.result);
-    const dateArr = examData.map(exam => exam.date);
-    
-    const getChartOptions = () => {
-        return {
-            series: [15, 23, 75, 100],
-            colors: ["#FDBA8C", "#1C64F2", "#16BDCA", "#E74694"],
-            chart: {
-                height: "100%",
-                width: "100%",
-                type: "donut",
-            },
-            stroke: {
-            colors: ["transparent"],
-                lineCap: "",
-            },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        labels: {
-                            show: true,
-                            name: {
-                                show: true,
-                                fontFamily: "Inter, sans-serif",
-                                offsetY: 20,
-                            },
-                            total: {
-                                showAlways: true,
-                                show: true,
-                                label: "ng/ml",
-                                fontFamily: "Inter, sans-serif",
-                                formatter: function (w) {
-                                    const sum = resultArr.reduce((a, b) => {
-                                        return Number(a) + Number(b)
-                                    }, 0)
-                                    return Math.floor(sum / resultArr.length);
-                                },
-                            },
-                            value: {
-                                show: true,
-                                fontFamily: "Inter, sans-serif",
-                                offsetY: -20,
-                                formatter: function (value) {
-                                    return value + "k"
-                                },
-                            },
-                        },
-                        size: "80%",
-                    },
-                },
-            },
-            grid: {
-                padding: {
-                    top: -2,
-                },
-            },
-            labels: ["Deficient", "Insufficient", "Optimum", "Potential Toxicity"],
-            dataLabels: {
-                enabled: false,
-            },
-            legend: {
-                position: "bottom",
-                fontFamily: "Inter, sans-serif",
-            },
-            yaxis: {
-                labels: {
-                    formatter: function (value) {
-                        value + "k"
-                    },
-                },
-            },
-            xaxis: {
-                labels: {
-                    formatter: function (value) {
-                        return value  + "k"
-                    },
-                },
-                axisTicks: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-            },
-        }
-    }
-
-    if (document.getElementById("donut-chart") && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(document.getElementById("donut-chart"), getChartOptions());
-        chart.render();
-    }
-</script>
-@endscript
