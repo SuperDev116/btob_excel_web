@@ -46,4 +46,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the subjects for the user.
+     */
+    public function subjects(): HasMany
+    {
+        return $this->hasMany(Subject::class);
+    }
+
+    /**
+     * Get all of the exams for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function exams(): HasManyThrough
+    {
+        return $this->hasManyThrough(Subject::class, Exam::class);
+    }
 }

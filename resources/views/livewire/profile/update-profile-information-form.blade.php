@@ -9,6 +9,7 @@ use Livewire\Volt\Component;
 new class extends Component
 {
     public string $name = '';
+    public string $phone = '';
     public string $email = '';
 
     /**
@@ -17,6 +18,7 @@ new class extends Component
     public function mount(): void
     {
         $this->name = Auth::user()->name;
+        $this->phone = Auth::user()->phone;
         $this->email = Auth::user()->email;
     }
 
@@ -29,6 +31,7 @@ new class extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -79,10 +82,16 @@ new class extends Component
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
+        
+        <div>
+            <x-input-label for="phone" :value="__('電話番号')" />
+            <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" required autofocus autocomplete="phone" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
+            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required readonly autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
