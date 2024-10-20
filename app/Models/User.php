@@ -49,8 +49,10 @@ class User extends Authenticatable
 
     /**
      * Get the subjects for the user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subjects(): HasMany
+    public function subjects()
     {
         return $this->hasMany(Subject::class);
     }
@@ -60,7 +62,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function exams(): HasManyThrough
+    public function exams()
     {
         return $this->hasManyThrough(Subject::class, Exam::class);
     }

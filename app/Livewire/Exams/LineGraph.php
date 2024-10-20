@@ -21,7 +21,7 @@ class LineGraph extends Component
         $this->subject = $subject;
         $this->exams = $subject->exams()->orderBy('date', 'asc')->get();
     }
-
+    
     public function render()
     {
         return view('livewire.exams.line-graph', [

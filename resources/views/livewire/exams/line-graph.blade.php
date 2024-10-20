@@ -1,15 +1,19 @@
 <div>
     <p class="font-bold">{{ $subject->first_name . " " . $subject->last_name}} の検査データ</p>
+    @if (count($exams))
     <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
         <div id="line-chart"></div>
     </div>
+    @else
+    <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+        <p class="font-bold">検査データがありません。</p>
+    </div>
+    @endif
 </div>
 
 @script
 <script>
-    const examData = <?php echo $exams; ?>;
-    
-    // Extracting results and dates using map
+    const examData = @json($exams);
     const resultArr = examData.map(exam => exam.result);
     const dateArr = examData.map(exam => exam.date);
     
