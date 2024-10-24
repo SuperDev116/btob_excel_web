@@ -12,15 +12,19 @@
         <tbody>
             @foreach ($page_exams as $exam)
             <tr wire:key="{{ $exam->id }}">
-                <td class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11 hover:cursor-">
+                <td
+                    wire:click="select({{ $exam->id }})"
+                    class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11 hover:cursor-pointer">
                     {{ $exam->date }}
                 </td>
-                <td class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11">
+                <td
+                    wire:click="select({{ $exam->id }})"
+                    class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11 hover:cursor-pointer">
                     {{ $exam->result }}
                 </td>
                 <td class="border-b border-[#eee] px-4 py-4 dark:border-strokedark">
                     <div class="flex items-center space-x-3.5">
-                        <button class="hover:text-primary" type="button" wire:click="delete({{ $exam->id }})"
+                        <button class="hover:text-primary" type="button" wire:click.prevent="delete({{ $exam->id }})"
                             wire:confirm="本当に削除しますか。">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

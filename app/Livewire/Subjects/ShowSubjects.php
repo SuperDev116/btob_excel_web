@@ -32,8 +32,11 @@ class ShowSubjects extends Component
 
     public function show_exams(Subject $subject)
     {
+        $selected_exam = $subject->exams()->orderBy('created_at', 'asc')->get()->last();
+        
         return redirect()->route('subject.exams.index', [
             'subject' => $subject,
+            'selected_exam' => $selected_exam,
         ]);
     }
 

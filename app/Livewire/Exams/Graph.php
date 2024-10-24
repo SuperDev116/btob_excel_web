@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Exam;
 
-use PDF;
+// use PDF;
 
 use Livewire\Attributes\Title;
 
@@ -16,19 +16,18 @@ use Livewire\Attributes\Title;
 class Graph extends Component
 {
     public $subject;
-    public $last_exam;
+    public $selected_exam;
 
     public function mount($subject)
     {
         $this->subject = $subject;
-        $this->last_exam = $subject->exams()->orderBy('created_at', 'asc')->get()->last();
     }
 
     public function render()
     {
         return view('livewire.exams.graph', [
             'subject' => $this->subject,
-            'last_exam' => $this->last_exam,
+            'selected_exam' => $this->selected_exam,
         ]);
     }
 
@@ -36,10 +35,10 @@ class Graph extends Component
     {
         // $pdf = PDF::loadView('pdf.graph-report', [
         //     'subject' => $this->subject,
-        //     'last_exam' => $this->last_exam
+        //     'selected_exam' => $this->selected_exam
         // ]);
 
         // return $pdf->download('graph-report.pdf');
-        return redirect()->route('print.exam', $this->last_exam->id);
+        return redirect()->route('print.exam', $this->selected_exam->id);
     }
 }

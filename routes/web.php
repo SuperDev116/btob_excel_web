@@ -23,8 +23,10 @@ Route::middleware(['auth'])->group(function ()
     Route::resources([
         'users' => UserController::class,
         'subjects' => SubjectController::class,
-        'subject.exams' => ExamController::class
+        // 'subject.exams' => ExamController::class
     ]);
+    
+    Route::get('subjects/{subject}/exams/{selected_exam?}', [ExamController::class, 'index'])->name('subject.exams.index');
 
     Route::get('/subject/{subject}/print', [SubjectController::class, 'print'])->name('print.subject');
     Route::get('/exam/{exam}/print', [ExamController::class, 'print'])->name('print.exam');

@@ -1,10 +1,10 @@
 <div>
-    @if (isset($last_exam))
+    @if (isset($selected_exam))
     <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 relative" id="result">
         <div class="flex justify-between items-start w-full">
             <div class="flex-col items-center">
                 <p class="font-bold">{{ $subject->first_name . " " . $subject->last_name}}</p>
-                <p class="font-bold">{{ $last_exam->date }} 検査結果</p>
+                <p class="font-bold">{{ $selected_exam->date }} 検査結果</p>
             </div>
             <div class="flex justify-center items-center">
                 <button
@@ -29,21 +29,21 @@
                     style="position: relative;"
                 >
                     <canvas id="gauge" width="384" height="192"></canvas>
-                    <input type="hidden" id="gaugeValue" min="0" max="200" value="{{ $last_exam->result }}" step="1">
+                    <input type="hidden" id="gaugeValue" min="0" max="200" value="{{ $selected_exam->result }}" step="1">
 
                     <div 
                         class="text-center pt-20" 
                         style="position: absolute;"
                     >
-                        <p class="font-bold text-5xl">{{ $last_exam->result }}</p>
+                        <p class="font-bold text-5xl">{{ $selected_exam->result }}</p>
                         <p class="font-bold text-xl mb-4">(ng/ml)</p>
-                        @if ($last_exam->result < 10)
+                        @if ($selected_exam->result < 10)
                         <p class="font-bold text-xl">欠乏</p>
-                        @elseif ($last_exam->result > 9 && $last_exam->result < 30)
+                        @elseif ($selected_exam->result > 9 && $selected_exam->result < 30)
                         <p class="font-bold text-xl">不足</p>
-                        @elseif ($last_exam->result > 29 && $last_exam->result < 100)
+                        @elseif ($selected_exam->result > 29 && $selected_exam->result < 100)
                         <p class="font-bold text-xl">充足</p>
-                        @elseif ($last_exam->result > 99 && $last_exam->result < 150)
+                        @elseif ($selected_exam->result > 99 && $selected_exam->result < 150)
                         <p class="font-bold text-xl">過剰</p>
                         @else
                         <p class="font-bold text-xl">毒性</p>

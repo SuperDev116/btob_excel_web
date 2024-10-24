@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Exam;
 
-use PDF;
+// use PDF;
 
 use Livewire\Attributes\Title;
 

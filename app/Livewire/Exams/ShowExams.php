@@ -14,7 +14,6 @@ use Livewire\Attributes\Title;
 class ShowExams extends Component
 {
     public $subject;
-    public $exams;
 
     #[Validate('required', message: '名前は必須です。')]
     public $date = '';
@@ -25,7 +24,6 @@ class ShowExams extends Component
     public function mount($subject)
     {
         $this->subject = $subject;
-        $this->exams = $subject->exams()->get();
     }
 
     public function render()
@@ -42,5 +40,19 @@ class ShowExams extends Component
     public function delete(Exam $exam)
     {
         $exam->delete();
+
+        return redirect()->route('subject.exams.index', [
+            'subject' => $this->subject
+        ]);
+    }
+
+    public function select(Exam $exam)
+    {
+        $selected_exam = $exam;
+        
+        return redirect()->route('subject.exams.index', [
+            'subject' => $this->subject,
+            'selected_exam' => $selected_exam,
+        ]);
     }
 }

@@ -12,13 +12,16 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Subject $subject)
+    public function index(Subject $subject, Exam $selected_exam = null)
     {
-        $exams = $subject->exams()->get();
-        
+        if ($selected_exam == null)
+        {
+            $selected_exam = $subject->exams()->orderBy('created_at', 'asc')->get()->last();
+        }
+
         return view('exams.index', [
             'subject' => $subject,
-            'exams' => $exams
+            'selected_exam' => $selected_exam,
         ]);
     }
 
