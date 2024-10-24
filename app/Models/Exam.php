@@ -25,7 +25,7 @@ class Exam extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function subject(): BelongsTo
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }

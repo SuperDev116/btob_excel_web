@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Exam;
 
+use PDF;
+
 use Livewire\Attributes\Title;
 
 #[Title('検査データ管理')]
@@ -29,4 +31,16 @@ class LineGraph extends Component
             'exams' => $this->exams
         ]);
     }
+
+    public function print()
+    {        
+        // $pdf = PDF::loadView('pdf.line-graph-report', [
+        //     'subject' => $this->subject,
+        //     'exams' => $this->exams
+        // ]);
+
+        // return $pdf->download($this->subject->id . 'line-graph-report.pdf');
+        return redirect()->route('print.subject', $this->subject->id);
+    }
+
 }

@@ -1,4 +1,5 @@
 <div class="w-full" id="table">
+    <p class="font-bold">{{ $subject->first_name . " " . $subject->last_name}}のビタミンD値表</p>
     @if (count($page_exams))
     <table class="w-full table-auto">
         <thead>
@@ -11,13 +12,13 @@
         <tbody>
             @foreach ($page_exams as $exam)
             <tr wire:key="{{ $exam->id }}">
-                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-stroke dark xl:pl-11">
+                <td class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11 hover:cursor-">
                     {{ $exam->date }}
                 </td>
-                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-stroke dark xl:pl-11">
+                <td class="border-b border-[#eee] px-4 py-4 pl-9 dark:border-stroke dark xl:pl-11">
                     {{ $exam->result }}
                 </td>
-                <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                <td class="border-b border-[#eee] px-4 py-4 dark:border-strokedark">
                     <div class="flex items-center space-x-3.5">
                         <button class="hover:text-primary" type="button" wire:click="delete({{ $exam->id }})"
                             wire:confirm="本当に削除しますか。">
@@ -45,11 +46,13 @@
     </table>
 
     <!-- Pagination Links -->
-    <div class="mt-4">
+    <div class="mt-3">
         {{ $page_exams->onEachSide(1)->links() }}
         <!-- This will render the pagination links -->
     </div>
     @else
-    <p class="font-bold">検査データがありません。</p>
+    <div class="p-4">
+        <p class="font-bold text-gray-500">検査データがありません。</p>
+    </div>
     @endif
 </div>

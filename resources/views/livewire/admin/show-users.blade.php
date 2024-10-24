@@ -16,7 +16,7 @@
                     電話番号
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
-                    非検査数
+                    被検査数
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
                 </th>

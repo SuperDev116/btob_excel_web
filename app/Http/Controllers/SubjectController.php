@@ -64,4 +64,14 @@ class SubjectController extends Controller
     {
         //
     }
+    
+    public function print(Subject $subject)
+    {
+        $exams = $subject->exams()->orderBy('date', 'asc')->get();;
+
+        return view('pdf.line-graph-report', [
+            'subject' => $subject,
+            'exams' => $exams
+        ]);
+    }
 }

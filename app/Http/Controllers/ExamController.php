@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -67,5 +68,17 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         //
+    }
+
+    public function print(Exam $exam)
+    {
+        $subject = $exam->subject()->first();
+        $user = User::find($subject->user_id);
+
+        return view('pdf.graph-report', [
+            'user' => $user,
+            'subject' => $subject,
+            'exam' => $exam
+        ]);
     }
 }

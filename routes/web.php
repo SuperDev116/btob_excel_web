@@ -8,6 +8,8 @@ use App\Http\Controllers\ExamController;
 
 // Route::view('/', 'welcome');
 
+Route::view('terms', 'terms')->name('terms');
+
 Route::middleware(['auth'])->group(function ()
 {
     Route::view('/', 'dashboard');
@@ -23,6 +25,9 @@ Route::middleware(['auth'])->group(function ()
         'subjects' => SubjectController::class,
         'subject.exams' => ExamController::class
     ]);
+
+    Route::get('/subject/{subject}/print', [SubjectController::class, 'print'])->name('print.subject');
+    Route::get('/exam/{exam}/print', [ExamController::class, 'print'])->name('print.exam');
 });
 
 require __DIR__.'/auth.php';

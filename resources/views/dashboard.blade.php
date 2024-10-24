@@ -29,8 +29,8 @@ use Illuminate\Support\Facades\Auth;
                                         class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                         被検者数 : {{ Subject::where('user_id', Auth::id())->count() }}名</h5>
                                 </a>
-                                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">12名の被検者が登録されています。</p>
-                                <a href="{{ route('subjects.index') }}" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">{{ Subject::where('user_id', Auth::id())->count() }}名の被検者が登録されています。</p>
+                                {{-- <a href="{{ route('subjects.index') }}" class="inline-flex font-medium items-center text-blue-600 hover:underline">
                                     被検者一覧はこちら
                                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -38,29 +38,38 @@ use Illuminate\Support\Facades\Auth;
                                             stroke-width="2"
                                             d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
                                     </svg>
-                                </a>
+                                </a> --}}
+                                <div class="pt-6 text-gray-900 dark:text-gray-100">
+                                    <a href="{{ route('subjects.index') }}" class="bg-amber-400 w-full inline-flex items-center justify-center text-center px-4 py-2 border border-transparent rounded-md font-semibold">
+                                        被検者・検査データの入力・変更・閲覧
+                                    </a>
+                                </div>
+                
+                                <div class="pt-6 text-gray-900 dark:text-gray-100">
+                                    <a href="{{ route('profile') }}" class="bg-amber-400 w-full inline-flex items-center justify-center text-center px-4 py-2 border border-transparent rounded-md font-semibold">
+                                        アカウント情報・パスワードの変更
+                                    </a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
 
                     {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            
                         </div>
                     </div> --}}
                 </div>
 
-                {{-- <div class="lg:w-2/3 md:w-1/2 sm:w-full">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                        </div>
+                <div class="lg:w-1/3 md:w-1/2 sm:w-full">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4 flex flex-col">
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
+                    {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                         </div>
-                    </div>
-                </div> --}}
+                    </div> --}}
+                </div>
             </div>
 
             {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

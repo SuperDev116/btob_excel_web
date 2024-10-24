@@ -16,18 +16,22 @@
                     </div>
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <livewire:exams.graph :subject="$subject">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/3 md:w-1/2 sm:w-full">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
+                        <div class="p-6 text-gray-900 dark:text-gray-100">
                             <livewire:exams.show-exams :subject="$subject" :exams="$exams">
                         </div>
                     </div>
                 </div>
-
-                <div class="lg:w-2/3 md:w-1/2 sm:w-full">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <livewire:exams.graph :subject="$subject">
-                        </div>
-                    </div>
-
+            </div>
+            
+            <div class="flex flex-row gap-4">
+                <div class="w-full">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             <livewire:exams.line-graph :subject="$subject">
