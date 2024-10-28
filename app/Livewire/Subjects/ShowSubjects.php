@@ -12,6 +12,8 @@ use Livewire\Attributes\Title;
 #[Title('被検者管理')]
 class ShowSubjects extends Component
 {
+    public $search = '';
+
     public function create()
     {
         return redirect()->route('subjects.create');
@@ -43,6 +45,25 @@ class ShowSubjects extends Component
     public function render()
     {
         $subjects = Subject::where('user_id', Auth::id())
+                            ->where(function ($query) {
+                                $query->where('last_name', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhere('first_name', 'LIKE', '%' . $this->search . '%');
+                            })
+                            ->orderBy('last_name')
+                            ->paginate(10);
+
+        return view('livewire.subjects.show-subjects', [
+            'subjects' => $subjects
+        ]);
+    }
+
+    public function filter()
+    {
+        $subjects = Subject::where('user_id', Auth::id())
+                            ->where(function ($query) {
+                                $query->where('last_name', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhere('first_name', 'LIKE', '%' . $this->search . '%');
+                            })
                             ->orderBy('last_name')
                             ->paginate(10);
 

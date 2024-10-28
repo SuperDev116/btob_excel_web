@@ -15,6 +15,7 @@
                         type="text"
                         wire:model="last_name"
                         placeholder="姓を入力"
+                        oninput="this.value = this.value.toUpperCase()"
                         class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                     @error("last_name") <em>{{ $message }}</em>@enderror
@@ -28,6 +29,7 @@
                         type="text"
                         wire:model="first_name"
                         placeholder="名を入力"
+                        oninput="this.value = this.value.toUpperCase()"
                         class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                     @error("first_name") <em>{{ $message }}</em>@enderror

@@ -1,4 +1,13 @@
 <div id="show-subjects-table">
+    <div class="w-1/4 mb-4">
+        <input
+            type="text"
+            wire:model="search"
+            wire:change='filter'
+            placeholder="姓名で検索"
+            class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+        />
+    </div>
     <table class="w-full table-auto">
         <thead>
             <tr class="bg-gray-200 text-left dark:bg-meta-4">
