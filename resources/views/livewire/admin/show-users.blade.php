@@ -7,7 +7,7 @@
         <thead>
             <tr class="bg-gray-200 text-left dark:bg-meta-4">
                 <th class="px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                    名前
+                    名
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
                     メール

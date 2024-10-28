@@ -221,7 +221,7 @@ return [
         'minute' => '分',
         'mobile' => '携帯',
         'month' => '月',
-        'name' => '名前',
+        'name' => '名',
         'national_code' => '国コード',
         'number' => '番号',
         'password' => 'パスワード',

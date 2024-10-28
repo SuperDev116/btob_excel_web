@@ -40,12 +40,12 @@
                                                 <p>出力日：{{ date('Y年m月d日'); }}</p>
                                                 <p>機関名：{{ $user->name }}</p>
                                                 <p>検査日：{{ date('Y年m月d日', strtotime($exam->date)) }}</p>
-                                                <p>お名前：{{ $subject->first_name }} {{ $subject->last_name }}</p>
+                                                <p>お名：{{ $subject->first_name }} {{ $subject->last_name }}</p>
                                             </div>
                                             <div class="pr-4">
                                                 <button id="back-btn" onclick="window.history.back();"
                                                     class="mr-4 w-4 h-4 rounded-lg">
-                                                    <svg class="w-6 h-6 me-2 text-gray-400" aria-hidden="true"
+                                                    <svg class="w-6 h-6 me-2 text-gray-800" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round"
@@ -55,22 +55,17 @@
                                                 </button>
     
                                                 <button id="download-btn" class=" w-4 h-4 rounded-lg">
-                                                    <svg class="w-6 h-6 me-2 text-gray-400" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                        viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z" />
-                                                        <path
-                                                            d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd" d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z" clip-rule="evenodd"/>
                                                     </svg>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div id="report-content">
-                                        <p class="font-bold text-xl my-8">総25-ヒドロキシビタミンD（25-OH ビタミンD）</p>
-                                        <div class="flex flex-row justify-between my-8 relative gap-16">
+                                    <div id="report-content" class="px-28">
+                                        <p class="font-bold text-lg my-8">総25-ヒドロキシビタミンD（25-OH ビタミンD）</p>
+                                        <div class="flex flex-row justify-center my-8 relative gap-16">
                                             <div class="w-2/3">
                                                 <div class="relative w-96 h-48">
                                                     <div id="gauge-container" class="flex justify-center items-center" style="position: relative;">

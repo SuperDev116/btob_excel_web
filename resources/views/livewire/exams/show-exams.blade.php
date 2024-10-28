@@ -1,5 +1,10 @@
 <div class="w-full" id="table">
-    <p class="font-bold">{{ $subject->first_name . " " . $subject->last_name}}のビタミンD値表</p>
+    <div class="flex justify-between items-start w-full">
+        <div class="flex-col items-center">
+            <p class="font-bold">{{ $subject->first_name . " " . $subject->last_name}}のビタミンD値のレコード </p>
+            <p>★左の円グラフに表示させたい過去の結果があれば、そのレコードをクリックしてください。</p>
+        </div>
+    </div>
     @if (count($page_exams))
     <table class="w-full table-auto">
         <thead>

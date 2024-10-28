@@ -43,7 +43,7 @@ class ShowSubjects extends Component
     public function render()
     {
         $subjects = Subject::where('user_id', Auth::id())
-                            ->orderByDesc('created_at')
+                            ->orderBy('last_name')
                             ->paginate(10);
 
         return view('livewire.subjects.show-subjects', [

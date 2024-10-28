@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 
+use Illuminate\Support\Facades\Auth;
+
 class SubjectController extends Controller
 {
     /**
@@ -73,5 +75,33 @@ class SubjectController extends Controller
             'subject' => $subject,
             'exams' => $exams
         ]);
+    }
+
+    public function csv_download(Subject $subject)
+    {
+        // $subjects = Subject::where('user_id', Auth::id())->with('exams')->get();
+        $subjects = Subject::where('user_id', Auth::id())->with(['exams' => function ($query) {
+            $query->orderBy('date');
+        }])->get();
+        
+        $content = "Name,Date,Result\n";
+
+        foreach ($subjects as $subject)
+        {
+            foreach ($subject->exams as $exam)
+            {
+                $row = $subject->first_name . ' ' . $subject->last_name . ',' . $exam->date . ',' . $exam->result;
+                $content .= $row . "\n";
+            }
+        }
+
+        $datetime = date('Y-m-d_H-i-s');
+        $filename = Auth::user()->name . '_exams_' . $datetime . '.csv';
+
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        echo $content;
+        exit();
     }
 }

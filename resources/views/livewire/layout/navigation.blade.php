@@ -31,20 +31,22 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('ダッシュボード') }}
+                        {{ __('メニュー一覧') }}
                     </x-nav-link>
                 </div>
+                @if (Auth::user()->role == 'user')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('subjects.index')" :active="request()->routeIs('subjects.*')" wire:navigate>
                         {{ __('被検者一覧') }}
                     </x-nav-link>
                 </div>
-                
+                @endif
+
                 @if (Auth::user()->role == 'admin')
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" wire:navigate>
-                        {{ __('ユーザー一覧') }}
+                        {{ __('機関一覧') }}
                     </x-nav-link>
                 </div>
                 @endif

@@ -80,7 +80,8 @@ new #[Layout('layouts.guest')] class extends Component
         
         <div class="flex items-center justify-start mt-4 text-xs">
             <span>
-                *アカウントの新規開設をもって<a class="underline text-gray-600 dark:text-gray-400 font-bold" href="{{ route('terms') }}" target="_blank" wire:navigate>
+                {{-- *アカウントの新規開設をもって<a class="underline text-gray-600 dark:text-gray-400 font-bold" href="{{ route('terms') }}" target="_blank" wire:navigate> --}}
+                *アカウントの新規開設をもって<a class="underline text-gray-600 dark:text-gray-400 font-bold" href="{{ asset('spark.pdf') }}" target="_blank">
                     {{ __('規約') }}
                 </a>に同意したものとみなします。
             </span>

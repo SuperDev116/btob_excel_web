@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('/subject/{subject}/print', [SubjectController::class, 'print'])->name('print.subject');
     Route::get('/exam/{exam}/print', [ExamController::class, 'print'])->name('print.exam');
+
+    Route::get('/csv_download', [SubjectController::class, 'csv_download'])->name('csv_download');
 });
 
 require __DIR__.'/auth.php';

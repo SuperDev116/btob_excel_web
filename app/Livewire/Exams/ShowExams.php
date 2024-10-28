@@ -15,10 +15,10 @@ class ShowExams extends Component
 {
     public $subject;
 
-    #[Validate('required', message: '名前は必須です。')]
+    #[Validate('required', message: '名は必須です。')]
     public $date = '';
     
-    #[Validate('required', message: '苗字は必須です。')]
+    #[Validate('required', message: '姓は必須です。')]
     public $result = '';
 
     public function mount($subject)
