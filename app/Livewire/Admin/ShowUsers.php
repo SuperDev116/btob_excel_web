@@ -20,4 +20,11 @@ class ShowUsers extends Component
     {
         $user->delete();
     }
+
+    public function show(User $user)
+    {
+        return redirect()->route('users.show', [
+            "user" => $user,
+        ]);
+    }
 }

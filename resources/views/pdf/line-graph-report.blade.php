@@ -25,57 +25,62 @@
             <main>
                 <div class="py-12">
                     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                        <div class="flex flex-row gap-4">
+                        <div class="flex flex-row">
                             <div class="w-full">
-                                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
-                                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                                        <div class="w-full flex flex-row justify-between">
-                                            <div class="w-1/3 border border-black p-4">
-                                                <p>出力日：{{ date('Y年m月d日'); }}</p>
-                                                <p>機関名：{{ $subject->user->name }}</p>
-                                                <p>お名：{{ $subject->first_name }} {{ $subject->last_name }}</p>
-                                            </div>
-                                            <div class="pr-4">
-                                                <button
-                                                    id="back-btn"
+                                <div class="p-6 bg-white overflow-hidden rounded-lg text-gray-800 font-bold">
+                                    <div class="flex flex-row justify-between">
+                                        <div class="w-1/3 border border-black p-4">
+                                            <p>出力日：{{ date('Y年m月d日'); }}</p>
+                                            <p>機関名：{{ $subject->user->name }}</p>
+                                            <p>お名：{{ $subject->first_name }} {{ $subject->last_name }}</p>
+                                        </div>
+                                        <div class="w-1/4" id="print-btn-group">
+                                            <div class="flex flex-row justify-between">
+                                                <button id="back-btn"
+                                                    type="button"
                                                     onclick="window.history.back();"
-                                                    class="mr-4 w-4 h-4 rounded-lg">
+                                                    class="bg-sky-400 hover:bg-gray-400 p-2 rounded inline-flex items-center"
+                                                >
                                                     <svg class="w-6 h-6 me-2 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
                                                     </svg>
+                                                    <span>前の画面に戻る</span>
                                                 </button>
-
-                                                <button
-                                                    id="download-btn"
-                                                    class=" w-4 h-4 rounded-lg">
+                                                <button id="download-btn"
+                                                    type="button"
+                                                    class="bg-amber-400 hover:bg-gray-400 p-2 rounded inline-flex items-center"
+                                                >
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                         <path fill-rule="evenodd" d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z" clip-rule="evenodd"/>
                                                     </svg>
+                                                    <span>印刷プレビュー</span>
                                                 </button>
                                             </div>
+                                            <div class="mt-4 border border-amber-400 w-full p-2">
+                                                <p>★プレビュー画面でレイアウトと倍率を<br/>　調節してから印刷してください。</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            @if (count($exams))
-                                            <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                                                <div class="flex justify-between items-center w-2/3 pb-4">
-                                                    <div class="flex-col items-center text-center">
-                                                        <p class="font-bold text-xl">(ng/ml)</p>
-                                                    </div>
-                                                    <div class="flex-col items-center text-center">
-                                                        <p class="font-bold text-2xl">あなたのビタミンD値の推移</p>
-                                                    </div>
+                                    </div>
+                                    <div>
+                                        @if (count($exams))
+                                        <div class="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
+                                            <div class="flex justify-between items-center w-2/3 pb-4">
+                                                <div class="flex-col items-center text-center">
+                                                    <p class="font-bold text-xl">(ng/ml)</p>
                                                 </div>
-                                                
-                                                <!-- Line Chart -->
-                                                <div id="line-chart"></div>
+                                                <div class="flex-col items-center text-center">
+                                                    <p class="font-bold text-2xl">あなたのビタミンD値の推移</p>
+                                                </div>
                                             </div>
                                             
-                                            @else
-                                            <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                                                <p class="font-bold">検査データがありません。</p>
-                                            </div>
-                                            @endif
+                                            <!-- Line Chart -->
+                                            <div id="line-chart"></div>
                                         </div>
+                                        @else
+                                        <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4">
+                                            <p class="font-bold">検査データがありません。</p>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -190,11 +195,9 @@
             }
 
             document.getElementById('download-btn').addEventListener('click', function (e) {
-                document.getElementById('download-btn').style.visibility = 'hidden';
-                document.getElementById('back-btn').style.visibility = 'hidden';
+                document.getElementById('print-btn-group').style.visibility = 'hidden';
                 window.print();
-                document.getElementById('download-btn').style.visibility = 'visible';
-                document.getElementById('back-btn').style.visibility = 'visible';
+                document.getElementById('print-btn-group').style.visibility = 'visible';
             });
         </script>
     </body>
