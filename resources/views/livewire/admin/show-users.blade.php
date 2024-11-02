@@ -7,13 +7,19 @@
         <thead>
             <tr class="bg-gray-200 text-left dark:bg-meta-4">
                 <th class="px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                    名
+                    機関名
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
                     メール
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
                     電話番号
+                </th>
+                <th class="px-4 py-4 font-medium text-black dark:text-white">
+                    責任者氏名
+                </th>
+                <th class="px-4 py-4 font-medium text-black dark:text-white">
+                    責任者役職
                 </th>
                 <th class="px-4 py-4 font-medium text-black dark:text-white">
                     被検査数
@@ -33,6 +39,12 @@
                 </td>
                 <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     {{ $user->phone }}
+                </td>
+                <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                    {{ $user->chief_name }}
+                </td>
+                <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                    {{ $user->chief_response }}
                 </td>
                 <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     {{ $user->subjects()->get()->count() }}

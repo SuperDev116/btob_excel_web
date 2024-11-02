@@ -12,6 +12,8 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
     public string $phone = '';
+    public string $chief_name = '';
+    public string $chief_response = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -24,6 +26,8 @@ new #[Layout('layouts.guest')] class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:13'],
+            'chief_name' => ['required', 'string'],
+            'chief_response' => ['required', 'string'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -52,6 +56,20 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="phone" :value="__('電話番号')" />
             <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="text" name="phone" required autofocus autocomplete="phone" />
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+        
+        <!-- Chief name -->
+        <div class="mt-4">
+            <x-input-label for="chief_name" :value="__('責任者氏名')" />
+            <x-text-input wire:model="chief_name" id="chief_name" class="block mt-1 w-full" type="text" name="chief_name" required autofocus autocomplete="chief_name" />
+            <x-input-error :messages="$errors->get('chief_name')" class="mt-2" />
+        </div>
+        
+        <!-- Chief response -->
+        <div class="mt-4">
+            <x-input-label for="chief_response" :value="__('責任者役職')" />
+            <x-text-input wire:model="chief_response" id="chief_response" class="block mt-1 w-full" type="text" name="chief_response" required autofocus autocomplete="chief_response" />
+            <x-input-error :messages="$errors->get('chief_response')" class="mt-2" />
         </div>
 
         <!-- Email Address -->

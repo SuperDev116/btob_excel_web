@@ -74,10 +74,20 @@
             </div>
 
             <button
-                class="flex w-full justify-center rounded bg-blue-500 p-3 font-medium text-white hover:bg-opacity-90"
+                class="flex w-full justify-center rounded bg-blue-500 p-3 mb-4 font-medium text-white hover:bg-opacity-90"
                 type="submit"
             >
                 保存
+            </button>
+            <button
+                type="button"
+                onclick="window.history.back();"
+                class="w-full bg-blue-500 hover:bg-gray-400 text-white hover:bg-opacity-90 p-3 justify-center rounded inline-flex items-center"
+            >
+                <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                </svg>
+                <span>そのまま前の画面に戻る</span>
             </button>
         </div>
     </form>

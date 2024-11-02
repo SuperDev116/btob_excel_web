@@ -46,6 +46,34 @@
                 </div>
             </div>
 
+            <div class="mb-4 flex flex-col gap-6 xl:flex-row">
+                <div class="w-full xl:w-1/2">
+                    <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                        責任者氏名 <span class="text-meta-1">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        wire:model="chief_name"
+                        placeholder="責任者氏名を入力"
+                        class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    />
+                    @error("chief_name") <em>{{ $message }}</em>@enderror
+                </div>
+
+                <div class="w-full xl:w-1/2">
+                    <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                        責任者役職 <span class="text-meta-1">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        wire:model="chief_response"
+                        placeholder="責任者役職を入力"
+                        class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    />
+                    @error("chief_response") <em>{{ $message }}</em>@enderror
+                </div>
+            </div>
+
             <button
                 class="flex w-full justify-center rounded bg-blue-500 p-3 font-medium text-white hover:bg-opacity-90"
                 type="submit"

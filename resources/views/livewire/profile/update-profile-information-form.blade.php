@@ -10,6 +10,8 @@ new class extends Component
 {
     public string $name = '';
     public string $phone = '';
+    public string $chief_name = '';
+    public string $chief_response = '';
     public string $email = '';
 
     /**
@@ -19,6 +21,8 @@ new class extends Component
     {
         $this->name = Auth::user()->name;
         $this->phone = Auth::user()->phone;
+        $this->chief_name = Auth::user()->chief_name;
+        $this->chief_response = Auth::user()->chief_response;
         $this->email = Auth::user()->email;
     }
 
@@ -32,6 +36,8 @@ new class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:13'],
+            'chief_name' => ['required', 'string'],
+            'chief_response' => ['required', 'string'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -68,17 +74,17 @@ new class extends Component
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            アカウント情報の変更
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            メールアドレス（ログイン時ID）は正確に入力してください。
         </p>
     </header>
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('機関名')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -88,9 +94,21 @@ new class extends Component
             <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" required autofocus autocomplete="phone" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
+        
+        <div>
+            <x-input-label for="chief_name" :value="__('責任者氏名')" />
+            <x-text-input wire:model="chief_name" id="chief_name" name="chief_name" type="text" class="mt-1 block w-full" required autofocus autocomplete="chief_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('chief_name')" />
+        </div>
+        
+        <div>
+            <x-input-label for="chief_response" :value="__('責任者役職')" />
+            <x-text-input wire:model="chief_response" id="chief_response" name="chief_response" type="text" class="mt-1 block w-full" required autofocus autocomplete="chief_response" />
+            <x-input-error class="mt-2" :messages="$errors->get('chief_response')" />
+        </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('メールアドレス（ログイン時のID）')" />
             <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autofocus autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

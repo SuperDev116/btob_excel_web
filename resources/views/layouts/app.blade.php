@@ -6,7 +6,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'B2B-Excel') }}</title>
-        
+
+        <link rel="icon" href="{{ asset('logo2.png') }}" type="image/png">
+
         <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
         
         <!-- Scripts -->
